@@ -68,19 +68,23 @@ class listener implements EventSubscriberInterface
 	{
 		$post_data= $event['post_data'];
 
-		$this->template->assign_vars(array(
-			'S_REASIGN_FIRST_POST'			=> ($post_data['topic_first_post_id'] != $post_data['post_id'] && $this->auth->acl_get('m_edit',  $post_data['forum_id'])) ? true : false,
-			'S_REASSIGN_FIRST_POST_CHECKED'	=> (isset($_POST['reassign_first_post'])) ? ' checked="checked"' : '',
-			)
-		);
+		if(isset($post_data['post_id']))
+		{
+			$this->template->assign_vars(array(
+				'S_REASIGN_FIRST_POST'			=> ($post_data['topic_first_post_id'] != $post_data['post_id'] && $this->auth->acl_get('m_edit',  $post_data['forum_id'])) ? true : false,
+				'S_REASSIGN_FIRST_POST_CHECKED'	=> (isset($_POST['reassign_first_post'])) ? ' checked="checked"' : '',
+				)
+			);
+		}
 	}
 
 	public function reasign_first_post($event)
 	{
+		$mode = $event['mode'];
 		$reasign = (isset($_POST['reassign_first_post'])) ? true : false;
 		$post_data= $event['post_data'];
 
-		if ($reasign && $this->auth->acl_get('m_edit', $post_data['forum_id']))
+		if ($mode == 'edit' && $reasign && $this->auth->acl_get('m_edit', $post_data['forum_id']))
 		{
 			$post_data['post_time'] = $post_data['topic_time'] - 1;
 			$post_data['topic_poster'] = $post_data['poster_id'];
