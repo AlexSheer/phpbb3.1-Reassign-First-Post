@@ -1,0 +1,28 @@
+{
+    "name": "sheer/reassignfirstpost",
+    "type": "phpbb-extension",
+    "description": "Reassign First Post",
+    "homepage": "http://www.phpbbguru.net/community/",
+    "version": "1.0.0",
+    "time": "2016-10-01",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Sheer",
+            "homepage": "http://www.phpbbguru.net/community/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+      "phpbb/epv": "dev-master"
+    },
+    "extra": {
+        "display-name": "Reassign First Post",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.1.6,<3.2.0@dev"
+        }
+    }
+}
