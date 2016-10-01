@@ -1,0 +1,9 @@
+services:
+    sheer.reassignfirstpost.listener:
+        class: sheer\reassignfirstpost\event\listener
+        arguments:
+            - @template
+            - @auth
+            - @dbal.conn
+        tags:
+            - { name: event.listener }
